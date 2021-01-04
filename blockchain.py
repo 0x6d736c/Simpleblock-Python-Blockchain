@@ -67,12 +67,12 @@ class Blockchain:
         Returns:
             proof <int> - the new proof once discovered.
         """
-        proof = 0
+        proof = 0                                                   #Set initial proof to 0.
 
-        while self.is_valid_proof(last_proof, proof) is False:
-            proof += 1
+        while self.is_valid_proof(last_proof, proof) is False:      #Pass to is_valid_proof to check against last_proof.
+            proof += 1                                              #Increment proof by 1, check again until combined proof hash is valid.
         
-        return proof
+        return proof                                                #Return validated proof.
 
 
     @staticmethod
