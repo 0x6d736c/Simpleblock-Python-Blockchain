@@ -56,10 +56,23 @@ class Blockchain:
 
 
     def proof_of_work(self, last_proof):
-        #while 
+        """Proof of work algorithm.
+        
+        Constantly checks if last_proof and proof combination is valid.
+        Proof is incremented by 1 and checked each iteration.
 
+        Arguments:
+            last_proof <int> - the previous block's proof.
+        
+        Returns:
+            proof <int> - the new proof once discovered.
+        """
+        proof = 0
 
-        print(self.last_block["proof"])
+        while self.is_valid_proof(last_proof, proof) is False:
+            proof += 1
+        
+        return proof
 
 
     @staticmethod
@@ -93,8 +106,7 @@ class Blockchain:
             <bool> - True if hashed combination has 4 leading 0s. False otherwise.
         """
 
-        combined = proof + last_proof                                   #Add proofs together.
-        encoded = f"{combined}".encode()                                #Encode combined proof.
+        encoded = f"{proof}{last_proof}".encode()                       #Encode combined proof.
         hashed =  hashlib.sha256(encoded).hexdigest()                   #Hash with SHA-256.
         return hashed[:4] == "0000"                                     #Return True/False if first 4 are 0s.
 
@@ -106,5 +118,4 @@ class Blockchain:
 
 
 blockchain = Blockchain()
-blockchain.proof_of_work("")
-print(Blockchain.is_valid_proof(100, 105))
+print(blockchain.proof_of_work(blockchain.last_block["proof"]))
