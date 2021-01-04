@@ -115,7 +115,3 @@ class Blockchain:
     def last_block(self):
         """Returns the last block in the Blockchain object."""
         return self.chain[-1]
-
-
-blockchain = Blockchain()
-print(blockchain.proof_of_work(blockchain.last_block["proof"]))
